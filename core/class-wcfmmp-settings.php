@@ -639,7 +639,7 @@ class WCFMmp_Settings {
 		if( !apply_filters( 'wcfm_is_allow_withdrawal_manage', true ) ) return; 
 		
 		$wcfm_withdrawal_options = get_option( 'wcfm_withdrawal_options', array() );
-		
+                
 		$wcfm_marketplace_withdrwal_payment_methods = get_wcfm_marketplace_withdrwal_payment_methods();
 		$wcfm_marketplace_withdrawal_order_status   = get_wcfm_marketplace_withdrwal_order_status();
 		$wcfm_marketplace_disallow_order_payment_methods = get_wcfm_marketplace_disallow_order_payment_methods();
@@ -667,7 +667,8 @@ class WCFMmp_Settings {
 		$disallow_order_payment_methods       = get_wcfm_marketplace_disallow_active_order_payment_methods(); //isset( $wcfm_withdrawal_options['disallow_order_payment_methods'] ) ? $wcfm_withdrawal_options['disallow_order_payment_methods'] : array();
 		$withdrawal_reverse                   = isset( $wcfm_withdrawal_options['withdrawal_reverse'] ) ? 'yes' : 'no';
 		$withdrawal_reverse_limit             = isset( $wcfm_withdrawal_options['withdrawal_reverse_limit'] ) ? $wcfm_withdrawal_options['withdrawal_reverse_limit'] : '';
-		
+                $withdrawal_reverse_stripe_split      = isset( $wcfm_withdrawal_options['withdrawal_reverse_stripe_split'] ) ? 'yes' : 'no';
+                
 		if( !empty( $disallow_order_payment_methods ) ) $disallow_order_payment_methods = array_keys( $disallow_order_payment_methods );
 		
 		?>
@@ -713,7 +714,9 @@ class WCFMmp_Settings {
 																																										"withdrawal_reverse" => array('label' => __('Reverse Withdrawal', 'wc-multivendor-marketplace'), 'type' => 'checkbox', 'name' => 'wcfm_withdrawal_options[withdrawal_reverse]', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $withdrawal_reverse, 'desc_class' => 'instructions', 'desc' => __( 'Enable this to keep track reverse withdrawals. In case vendor receive full payment (e.g. COD) from customer then they have to reverse-pay admin commission. This is only applicable for reverse-withdrawal payment methods.', 'wc-multivendor-marketplace' ) ),
 																																										"withdrawal_order_payment_methods" => array( 'label' => __( 'Reverse or No Withdrawal Payment Methods', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[disallow_order_payment_methods]', 'type' => 'checklist', 'wrapper_class' => 'reverse_withdrawal_ele', 'class' => 'wcfm-checkbox wcfm_ele reverse_withdrawal_ele', 'label_class' => 'wcfm_title wcfm_full_title reverse_withdrawal_ele', 'options' => $wcfm_marketplace_disallow_order_payment_methods, 'value' => $disallow_order_payment_methods, 'desc_class' => 'reverse_withdrawal_ele', 'desc' => __( 'Order Payment Methods which are not applicable for vendor withdrawal request. e.g Order payment method COD and vendor receiving that amount directly from customers. So, no more require withdrawal request. You may also enable Reverse Withdrawal to track reverse pending payments for such payment options.', 'wc-multivendor-marketplace' )  ),
 																																										"withdrawal_setting_break_3" => array( 'type' => 'html', 'class' => "reverse_withdrawal_ele", 'value' => '<div style="height: 15px;"></div>' ),
-																																										
+																																																																																				
+                                                                                                                                                                                                                                                                                                                                                "withdrawal_reverse_stripe_split" => array('label' => __('Reverse Withdrawal for Stripe Split', 'wc-multivendor-marketplace'), 'type' => 'checkbox', 'name' => 'wcfm_withdrawal_options[withdrawal_reverse_stripe_split]', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $withdrawal_reverse_stripe_split, 'desc_class' => 'instructions', 'desc' => __( 'Enable direct payment between customer and vendor for Stripe Split.', 'wc-multivendor-marketplace' ) ),
+
 																																										"withdrawal_reverse_limit" => array('label' => __('Reverse Withdraw Limit', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_reverse_limit]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele reverse_withdrawal_ele', 'label_class' => 'wcfm_title wcfm_ele reverse_withdrawal_ele', 'value' => $withdrawal_reverse_limit, 'desc_class' => 'instructions reverse_withdrawal_ele', 'attributes' => array( 'min' => '1', 'step' => '1'), 'desc' => __('Set reverse withdrawal threshold limit, if reverse-pay balance reach this limit then vendor will not allow to withdrawal anymore. Leave empty to inactive this option.', 'wc-multivendor-marketplace') ),
 																																										), $wcfm_withdrawal_options ) );
 					?>

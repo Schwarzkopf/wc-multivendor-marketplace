@@ -452,7 +452,9 @@ class WCFMmp_Commission {
 		$split_payers = array();
 		$total_vendor_commission = 0;
 		$vendor_wise_gross_sales = $this->wcfmmp_split_pay_vendor_wise_gross_sales($order);
-		
+		$wcfm_withdrawal_options = get_option( 'wcfm_withdrawal_options', array() );
+		$withdrawal_reverse_stripe_split = isset( $wcfm_withdrawal_options['withdrawal_reverse_stripe_split'] ) ? true : false;
+
 		if( $vendor_wise_gross_sales && is_array($vendor_wise_gross_sales) ) {
 			foreach( $vendor_wise_gross_sales as $vendor_id => $distribution_info ) {
 				$vendor_payment_method = $WCFMmp->wcfmmp_vendor->get_vendor_payment_method( $vendor_id );
@@ -477,7 +479,7 @@ class WCFMmp_Commission {
 						$vendor_order_amount = $this->wcfmmp_calculate_vendor_order_commission( $vendor_id, $order->get_id(), $order );
 						$vendor_commission = round( $vendor_order_amount['commission_amount'], 2 );
 						//wcfm_stripe_log( "Stripe Split Pay:: #" . $order->get_id() . " => " . $vendor_id . " => " . $vendor_commission );
-						if( $vendor_commission > 0 ) {
+						if( $vendor_commission > 0 && !$withdrawal_reverse_stripe_split) {
 							$split_payers[$vendor_id] = array(
 								'destination' => $vendor_connect_user_id,
 								'commission'  => $vendor_commission,
