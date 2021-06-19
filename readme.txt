@@ -5,9 +5,9 @@ Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.7
 WC requires at least: 3.0
-WC tested up to: 5.2.0
+WC tested up to: 5.4.0
 Requires PHP: 5.6
-Stable tag: 3.4.8
+Stable tag: 3.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -254,6 +254,15 @@ NONE.
 
 
 == Changelog ==
+
+= 3.4.9 =
+*Updated - 13/06/2021*
+
+* Enhance - WooCommerce 5.4+ compatibility check added
+* Enhance - Item id added to filter "wcfmmp_commission_deducted_tax"
+* Enhance - Item id added to filter "wcfmmp_commission_deducted_transaction_charge"
+* Fixed   - ON Partial Refund "Commission on Tax" not properly updating issue resolved
+* Fixed   - ON Refund "Shipping cost" not refunding issue resolved
 
 = 3.4.8 =
 *Updated - 24/04/2021*
@@ -1520,11 +1529,9 @@ NONE.
 
 == Upgrade Notice ==
 
-= 3.4.8 =
-* Enhance - WooCommerce 5.2+ compatibility check added
-* Fixed   - wcfm-script-core.js "file" undefined issue resolved
-* Fixed   - Store setting dulicate slug error not showing issue resolved
-* Fixed   - Product Custom attributes with "double quotes" variation not properly saving issue resolved
-* Fixed   - Store SEO Yoast SEO deprecated function warning issue resolved
-* Fixed   - Vendor registration "date" type custom fields date-format issue resolved 
-* Fixed   - Downloadable product multiple file upload issue resolved
+= 3.4.9 =
+* Enhance - WooCommerce 5.4+ compatibility check added
+* Enhance - Item id added to filter "wcfmmp_commission_deducted_tax"
+* Enhance - Item id added to filter "wcfmmp_commission_deducted_transaction_charge"
+* Fixed   - ON Partial Refund "Commission on Tax" not properly updating issue resolved
+* Fixed   - ON Refund "Shipping cost" not refunding issue resolved
